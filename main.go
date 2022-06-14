@@ -23,10 +23,8 @@ import (
 
 func main() {
 
-	const priceOfOneApple = 5.99
-	const priceOfOnePear = 7.00
 	const currency = "грн."
-	const totalAmount = 23.00
+
 	const firstQuestion = "1. Скільки грошей треба витратити, щоб купити 9 яблук та 8 груш?"
 	const secondQuestion = "2. Скільки груш ми можемо купити?"
 	const thirdQuestion = "3. Скільки яблук ми можемо купити?"
@@ -36,15 +34,26 @@ func main() {
 	const secondAnswerVariantOne = " грушу"
 	const secondAnswerVariantTwo = " груші"
 	const secondAnswerVariantThree = " груш"
+	const thirdAnswerVariantOne = " яблуко"
+	const thirdAnswerVariantTwo = " яблука"
+	const thirdAnswerVariantThree = " яблук"
 	const degreeOfRounding = 100 //ступінь округлення до двох знаків
-	const youDontHaveEnoughMoney = "У вас недостатьно грошей!"
+	const youDontHaveEnoughMoney = "Ні. У вас недостатьно грошей!"
+	const youCantBuyFruits = "У вас недостатьно грошей!"
+	const youHaveEnoughMoney = "Так. У вас достатьно грошей!"
 
-	var numberOfPearsCanBuy float64
-	// var numberOfApplesCanBuy byte
+	var priceOfOneApple = 5.99
+	var priceOfOnePear = 7.00
+	var totalAmount = 23.00
+
+	var numberOfPearsCanBuy int64
+	var numberOfApplesCanBuy int64
 	var numberOfPearsWantBuy float64
 	var numberOfApplesWantBuy float64
 	var budgetToBuyApllesAndPears float64
 	var secondAnswer string
+	var thirdAnswer string
+	var totalBudget float64
 
 	// 1. Скільки грошей треба витратити, щоб купити 9 яблук та 8 груш?
 
@@ -57,14 +66,41 @@ func main() {
 
 	// 2. Скільки груш ми можемо купити?
 	fmt.Println(secondQuestion)
-	numberOfPearsCanBuy = math.Trunc(totalAmount / priceOfOnePear)
-	if numberOfPearsCanBuy < 1 {
-		secondAnswer = youDontHaveEnoughMoney
-	} else if numberOfPearsCanBuy < 5 {
-		secondAnswer = youCanBuyAnswerPart + strconv.FormatFloat(numberOfPearsCanBuy, 'f', 0, 64) + secondAnswerVariantTwo
+	numberOfPearsCanBuy = int64(math.Trunc(totalAmount / priceOfOnePear))
+	if numberOfPearsCanBuy%10 < 1 {
+		secondAnswer = youCantBuyFruits
+	} else if numberOfPearsCanBuy%10 == 1 {
+		secondAnswer = youCanBuyAnswerPart + strconv.FormatInt(numberOfPearsCanBuy, 10) + secondAnswerVariantOne
+	} else if numberOfPearsCanBuy%10 < 5 {
+		secondAnswer = youCanBuyAnswerPart + strconv.FormatInt(numberOfPearsCanBuy, 10) + secondAnswerVariantTwo
 	} else {
-		secondAnswer = youCanBuyAnswerPart + strconv.FormatFloat(numberOfPearsCanBuy, 'f', 0, 64) + secondAnswerVariantThree
+		secondAnswer = youCanBuyAnswerPart + strconv.FormatInt(numberOfPearsCanBuy, 10) + secondAnswerVariantThree
+	}
+	fmt.Println(secondAnswer)
+
+	// 3. Скільки яблук ми можемо купити?
+	fmt.Println(thirdQuestion)
+	numberOfApplesCanBuy = int64(math.Trunc(totalAmount / priceOfOneApple))
+	if numberOfApplesCanBuy%10 < 1 {
+		secondAnswer = youCantBuyFruits
+	} else if numberOfApplesCanBuy%10 == 1 {
+		secondAnswer = youCanBuyAnswerPart + strconv.FormatInt(numberOfPearsCanBuy, 10) + thirdAnswerVariantOne
+	} else if numberOfApplesCanBuy%10 < 5 {
+		thirdAnswer = youCanBuyAnswerPart + strconv.FormatInt(numberOfApplesCanBuy, 10) + thirdAnswerVariantTwo
+	} else {
+		thirdAnswer = youCanBuyAnswerPart + strconv.FormatInt(numberOfApplesCanBuy, 10) + thirdAnswerVariantThree
 	}
 
-	fmt.Println(secondAnswer)
+	fmt.Println(thirdAnswer)
+
+	// 4. Чи ми можемо купити 2 груші та 2 яблука?
+	fmt.Println(fourthQuestion)
+	numberOfPearsWantBuy = 2
+	numberOfApplesWantBuy = 2
+	totalBudget = numberOfPearsWantBuy*priceOfOnePear + numberOfApplesWantBuy*priceOfOneApple
+	if totalBudget > totalAmount {
+		fmt.Println(youDontHaveEnoughMoney)
+	} else {
+		fmt.Println(youHaveEnoughMoney)
+	}
 }
