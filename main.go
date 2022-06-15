@@ -22,7 +22,7 @@ func main() {
 	var (
 		priceOfOneApple float64 = 5.99
 		priceOfOnePear  float64 = 7.
-		totalAmount             = 23.
+		totalAmount     float64 = 23.
 	)
 
 	// 1. Скільки грошей треба витратити, щоб купити 9 яблук та 8 груш?
