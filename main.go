@@ -34,12 +34,12 @@ func main() {
 
 	// 2. Скільки груш ми можемо купити?
 	numberOfPearsCanBuy := int(totalAmount / priceOfOnePear)
-	fmt.Println("2. Скільки груш ми можемо купити?\nВідповідь -", numberOfPearsCanBuy, "шт.")
-
+	//fmt.Println("2. Скільки груш ми можемо купити?\nВідповідь -", numberOfPearsCanBuy, "шт.")
+	fmt.Printf("2. Скільки груш ми можемо купити?\nВідповідь - %d шт.\n", numberOfPearsCanBuy)
 	// 3. Скільки яблук ми можемо купити?
 	numberOfApplesCanBuy := int(totalAmount / priceOfOneApple)
-	fmt.Println("3. Скільки яблук ми можемо купити?\nВідповідь -", numberOfApplesCanBuy, "шт.")
-
+	//fmt.Println("3. Скільки яблук ми можемо купити?\nВідповідь -", numberOfApplesCanBuy, "шт.")
+	fmt.Printf("2. Скільки яблук ми можемо купити?\nВідповідь - %d шт.\n", numberOfApplesCanBuy)
 	// 4. Чи ми можемо купити 2 груші та 2 яблука?
 	numberOfPearsWantBuy := 2
 	numberOfApplesWantBuy := 2
